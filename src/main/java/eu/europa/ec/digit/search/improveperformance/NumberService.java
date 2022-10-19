@@ -40,9 +40,26 @@ public class NumberService {
     }
 
     public Integer findSmallestDuplicateImproved(List<Integer> data) {
-        
-        throw new UnsupportedOperationException("Not implemented.");
+        // use a HashSet so that adding and checking if an element is present
+        // takes O(1) and then traverse the list of data to check the duplicates
+        // using this HashSet; thus, the algorithm runs in O(n) time (but uses O(n) space)
+        HashSet<Integer> hashData = new HashSet<>();
+        int min = Integer.MAX_VALUE;
 
+        for (int i = 0; i < data.size(); i++) {
+            int item = data.get(i);
+            if (hashData.contains(item)) {
+                // a duplicate
+                if (item < min) {
+                    // found a new minimum
+                    min = item;
+                }
+            } else {
+                hashData.add(item);
+            }
+        }
+
+        return (min < Integer.MAX_VALUE) ? min : null;
     }
 
     public List<Integer> generateData() {
