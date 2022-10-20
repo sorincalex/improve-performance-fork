@@ -32,7 +32,7 @@ class NumberServiceTest {
         long tookSlow = System.currentTimeMillis() - start;
 
         start = System.currentTimeMillis();
-        Integer duplicateFast = numberService.findSmallestDuplicateImproved(data);
+        Integer duplicateFast = numberService.findSmallestDuplicateImproved2(data);
         long tookFast = System.currentTimeMillis() - start;
         
         assertEquals(duplicateSlow, duplicateFast);
