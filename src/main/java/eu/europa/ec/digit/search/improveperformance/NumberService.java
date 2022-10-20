@@ -45,17 +45,39 @@ public class NumberService {
         // using this HashSet; thus, the algorithm runs in O(n) time (but uses O(n) space)
         HashSet<Integer> hashData = new HashSet<>();
         int min = Integer.MAX_VALUE;
+        int size = data.size();
 
-        for (int i = 0; i < data.size(); i++) {
+        for (int i = 0; i < size; i++) {
             int item = data.get(i);
-            if (hashData.contains(item)) {
+            if (!hashData.add(item)) {
                 // a duplicate
                 if (item < min) {
                     // found a new minimum
                     min = item;
                 }
-            } else {
-                hashData.add(item);
+            }
+        }
+
+        return (min < Integer.MAX_VALUE) ? min : null;
+    }
+
+    // this method makes an important assumption: the items in the list
+    // are in the range 0 .. SAMPLE_SIZE
+    public Integer findSmallestDuplicateImproved2(List<Integer> data) {
+        // keep an array of frequencies
+        int freq[] = new int[SAMPLE_SIZE];
+
+        int min = Integer.MAX_VALUE;
+
+        int s = data.size();
+        for (int i = 0; i < s; i++) {
+            int d = data.get(i);
+            // count the frequency of each item
+            freq[d]++;
+
+            if (freq[d] > 1) {
+                // it's a duplicate
+                if (d < min) min = d;
             }
         }
 
